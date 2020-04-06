@@ -1,0 +1,14 @@
+<div class="sidebar-main ">
+    <h1>Column 4</h1>
+    <div class="content block-collapsible-nav-content">
+        <ul class="nav items" style="text-align: right">
+            <li class="nav item" style="float: left;display: block"><a href="<?= $block->getUrl('ticktop/ticketlist/*');?>">Add new Topic</a></li>
+            <?php foreach ($block->getTopicList() as $item) : ?>
+            <li class="nav item">
+                <a href="?x=<?= $item['topic_id'] ?>"><?= $item['title'].'/'.$item['defatitle'].'('.$item['staff'].')' ?></a>
+            </li>
+            <?php endforeach; ?>
+
+        </ul>
+    </div>
+</div>

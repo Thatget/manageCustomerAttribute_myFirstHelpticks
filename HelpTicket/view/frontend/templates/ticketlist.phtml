@@ -1,0 +1,113 @@
+<div class="column main" style="float: left" >
+    <div>
+        <?php if (!$block->getContent()){ ?>
+            <form class="form" id="custom-form" method="post" action="<?= $block->getFormAction();?>">
+                <fieldset class="fieldset">
+                    <legend class="legend"><span><?php echo __('Create new Topic') ?></span></legend><br>
+                    <div class="field required">
+                        <label for="topic_name" class="label"><span><?php echo __('Topic Name') ?></span></label>
+                        <div class="control">
+                            <input required type="text" name="topicname" id="topic_name" class="input-text">
+                        </div>
+                    </div>
+                    <div class="field items required">
+                        <label for="department" class="label">
+                            <span><?= $block->escapeHtml(__('Department')) ?></span>
+                        </label>
+                        <div class="control">
+                            <select name="department" id="department" required class="select">
+                                <option value=""><?= $block->escapeHtml(__('-- Please Select Department--')) ?></option>
+                                <?php foreach ($block->getDepartmentList() as $item) : ?>
+                                    <option value="<?= $item['department_id'] ?>">
+                                        <?= $item['title'] ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field items required">
+                        <label for="Severity" class="label">
+                            <span><?= $block->escapeHtml(__('Severity')) ?></span>
+                        </label>
+                        <div class="control">
+                            <select name="severity" id="severity" required class="select">
+                                <option value=""><?= $block->escapeHtml(__('-- Select Severity--')) ?></option>
+                                <option value="0">
+                                    <span><?= $block->escapeHtml(__('Severity 1')) ?></span>
+                                </option>
+                                <option value="1">
+                                    <span><?= $block->escapeHtml(__('Severity 2')) ?></span>
+                                </option>
+                                <option value="2">
+                                    <span><?= $block->escapeHtml(__('Severity 3')) ?></span>
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field required">
+                        <label for="ticket_content" class="label"><span><?php echo __('Content') ?></span></label>
+                        <div class="control">
+                            <textarea name="content" id="ticket_content" class="input-text" required></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="actions-toolbar">
+                    <div class="primary" style="float: right">
+                        <button type="submit" class="action submit primary" title="<?php  echo __('Add') ?>"><span><?php echo __('Add new') ?></span></button>
+                    </div>
+                </div>
+            </form>
+        <?php }else{ ?>
+            <div><h2><?= $block->getTopicContent()['title'];?></h2></div>
+            <!--Message Content!-->
+            <div style="border: #0a820b 1px solid;width: 100%;max-height: 50%;">
+                <?php foreach ($block->getTicketContent() as $item): ?>
+                    <?php if ($item['topic']=='customer'){ ?>
+                        <h5 style="text-align: right;margin-right: 5px;color: #0a820b"><?= $item['content'] ?></h5>
+                    <?php }else{ ?>
+                        <h5 style="color: red;margin-left: 5px"><?= $item['content'] ?></h5>
+                    <?php }?>
+                <?php endforeach; ?>
+            </div>
+            <!--End Message Content!-->
+            <?php if ($block->checkClose()['status']): ?>
+            <form class="form" id="custom_form" method="post" action="<?= $block->getticketAction();?>">
+                <fieldset class="fieldset">
+                    <div class="field items required">
+                        <label for="Severity" class="label">
+                            <span><?= $block->escapeHtml(__('Severity')) ?></span>
+                        </label>
+                        <div class="control">
+                            <select name="severity" id="severity" required class="select">
+                                <option value=""><?= $block->escapeHtml(__('-- Select Severity--')) ?></option>
+                                <option value="0">
+                                    <span><?= $block->escapeHtml(__('Severity 1')) ?></span>
+                                </option>
+                                <option value="1">
+                                    <span><?= $block->escapeHtml(__('Severity 2')) ?></span>
+                                </option>
+                                <option value="2">
+                                    <span><?= $block->escapeHtml(__('Severity 3')) ?></span>
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field required">
+                        <div class="control">
+                            <textarea name="content" id="ticket_content" class="input-text" required></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="actions-toolbar">
+                    <div class="primary" style="float: right">
+                        <button name="topicid" value="<?= $block->getContent() ?>" type="submit" class="action submit primary" title="<?php  echo __('Add') ?>"><span><?php echo __('Send') ?></span></button>
+                    </div>
+                    <div class="primary">
+                        <a class="action submit primary" href="<?= $block->getticketAction() ?>close/<?= $block->getContent() ?>" ><span><?php echo __('Close Topic') ?></span></a>
+                    </div>
+                </div>
+            </form>
+            <?php endif;
+        } ?>
+    </div>
+</div>

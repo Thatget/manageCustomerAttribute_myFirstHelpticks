@@ -1,0 +1,43 @@
+        <?php foreach ($block->getAll() as $item): ?>
+        <div id="tabx_<?= $item['department_id'] ?>">
+            <div class="row">
+                <div class=" col-m-9 " >
+                    <?php if ($block->checkTicketContent()):?>
+                        <div style="max-height: 50%;border: #0a820b 1px solid;width: 95%;">
+                            <?php foreach ( $block->getTicketContent() as $value) :?>
+                                <?php if ($value['topic']=='customer'){ ?>
+                                    <h5 style="text-align: right;color:red;margin-right: 5px"><?= $value['content'] ?></h5>
+                                <?php }else{ ?>
+                                    <h5 style="text-align: left;color:#342eff;margin-left: 5px"><?= $value['content'] ?></h5>
+                                <?php } ?>
+                            <?php endforeach; ?>
+                        </div>
+                    <div>
+                        <form class="form" id="perguntas-form" action="<?= $block->getUrl('helptick/tick/save') ?>" method="post" autocomplete="off">
+                            <div >
+                                <textarea style="width: 95%;border: #0a6c9f 1px solid;margin: auto" name="content" ></textarea>
+                            </div>
+                            <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>" />
+                            <input type="hidden" name="department_id" value="<?=$item['department_id']?>"/>
+                            <input type="hidden" name="topic_id" value="<?= $block->checkTicketContent()?>"/>
+                            <button type="submit">Send</button>
+                        </form>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <div class="col-m-3 ">
+                    <table>
+                    <?php foreach ($block->getTopiclist($item['department_id']) as $items ):  ?>
+                            <tr><td>
+                                <a href="<?= $block->getUrl('helptick/tick/defa').'tab_department/title_department_'.$item['department_id'].'/department_ticket/'.$items['topic_id']; ?>">
+                                    <?= $items['title'] ?>
+                                </a>
+                            </td></tr>
+                    <?php endforeach; ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>

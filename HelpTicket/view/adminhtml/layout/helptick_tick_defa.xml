@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles" />
+    <body>
+        <referenceContainer name="content">
+            <block class="MW\HelpTicket\Block\Adminhtml\Defa\Department" name="ticket_department" template = 'MW_HelpTicket::department/Index.phtml'/>
+            <container name="form_field" htmlTag="div" htmlId="tab1_content">
+                <uiComponent name="help_defa_form"/>
+            </container>
+            <block class="MW\HelpTicket\Block\Adminhtml\Defa\Department" name="department_list" template='MW_HelpTicket::department/Departmentlist.phtml'/>
+            <block class="MW\HelpTicket\Block\Adminhtml\Ticket\Topiclist" name="topic_list" template='MW_HelpTicket::department/Topiclist.phtml'/>
+        </referenceContainer>
+    </body>
+</page>

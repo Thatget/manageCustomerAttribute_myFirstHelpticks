@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* Copyright © Magento, Inc. All rights reserved.
+* See COPYING.txt for license details.
+*/
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">creatt_attribute_form.creatt_attribute_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+<!--            <button name="save_and_continue" class="MW\CreAtt\Block\Adminhtml\Attribute\Edit\SaveAndContinueButton"/>-->
+            <button name="save" class="MW\CreAtt\Block\Adminhtml\Attribute\Edit\SaveButton"/>
+            <button name="reset" class="MW\CreAtt\Block\Adminhtml\Attribute\Edit\ResetButton"/>
+            <button name="back" class="MW\CreAtt\Block\Adminhtml\Attribute\Edit\BackButton"/>
+        </buttons>
+        <namespace>creatt_attribute_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>creatt_attribute_form.creatt_attribute_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="creatt_attribute_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="creatt/index/save"/>
+        </settings>
+        <dataProvider class="MW\CreAtt\Model\Attribute\DataProvider" name="creatt_attribute_form_data_source">
+            <settings>
+                <requestFieldName>attribute_id</requestFieldName>
+                <primaryFieldName>attribute_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Manage Note</item>
+                <item name="dataScope" xsi:type="string"/>
+                <item name="sortOrder" xsi:type="number">0</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <field name="attribute_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array"><item name="source" xsi:type="string">block</item>
+                    </item>
+                </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>attribute_id</dataScope>
+            </settings>
+        </field>
+        <field name="attribute_code" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">block</item>
+                    </item>
+                </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>attribute_code</dataScope>
+            </settings>
+        </field>
+        <field name="customer_system" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">block</item>
+                    </item>
+                </argument>
+            <settings>
+                <dataType>select</dataType>
+                <visible>false</visible>
+                <dataScope>customer_system</dataScope>
+            </settings>
+        </field>
+        <field name="frontend_label">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="required" xsi:type="string">true</item>
+                    <item name="label" xsi:type="string" translate="true">Attribute Label</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">frontend_label</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <imports>
+                    <link name="disabled">${ $.provider}:data.do_we_hide_it</link>
+                </imports>
+            </settings>
+        </field>
+        <field name="aatributr_code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="required" xsi:type="string">true</item>
+                    <item name="label" xsi:type="string" translate="true">Attribute Code</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">attribute_code</item>
+                </item>
+            </argument>
+            <settings>
+                <imports>
+                    <link name="disabled">${ $.provider}:data.do_we_hide_it</link>
+                </imports>
+            </settings>
+        </field>
+        <field name="input_type" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Input Type</label>
+                <dataScope>input_type</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">boolean</item>
+                                <item name="label" xsi:type="string">Yes/No</item>
+                            </option>
+                            <option name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">select</item>
+                                <item name="label" xsi:type="string">Select</item>
+                            </option>
+                            <option name="2" xsi:type="array">
+                                <item name="value" xsi:type="string">text</item>
+                                <item name="label" xsi:type="string">Text</item>
+                            </option>
+                            <option name="2" xsi:type="array">
+                                <item name="value" xsi:type="string">media_image</item>
+                                <item name="label" xsi:type="string">Media Image</item>
+                            </option>
+                            <option name="3" xsi:type="array">
+                                <item name="value" xsi:type="string">data</item>
+                                <item name="label" xsi:type="string">Date</item>
+                            </option>
+                            <option name="3" xsi:type="array">
+                                <item name="value" xsi:type="string">price</item>
+                                <item name="label" xsi:type="string">Price</item>
+                            </option>
+                            <option name="4" xsi:type="array">
+                                <item name="value" xsi:type="string">textarea</item>
+                                <item name="label" xsi:type="string">TextArea</item>
+                            </option>
+                            <option name="5" xsi:type="array">
+                                <item name="value" xsi:type="string">image</item>
+                                <item name="label" xsi:type="string">Image</item>
+                            </option>
+                            <option name="5" xsi:type="array">
+                                <item name="value" xsi:type="string">allegy</item>
+                                <item name="label" xsi:type="string">Gallery</item>
+                            </option>
+                            <option name="6" xsi:type="array">
+                                <item name="value" xsi:type="string">hidden</item>
+                                <item name="label" xsi:type="string">Hidden</item>
+                            </option>
+                            <option name="6" xsi:type="array">
+                                <item name="value" xsi:type="string">multiselect</item>
+                                <item name="label" xsi:type="string">Multiselect</item>
+                            </option>
+                            <option name="6" xsi:type="array">
+                                <item name="value" xsi:type="string">multiline</item>
+                                <item name="label" xsi:type="string">Multiline</item>
+                            </option>
+                        </options>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="data_type" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Data Type</label>
+                <dataScope>data_type</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">static</item>
+                                <item name="label" xsi:type="string">Static</item>
+                            </option>
+                            <option name="2" xsi:type="array">
+                                <item name="value" xsi:type="string">text</item>
+                                <item name="label" xsi:type="string">Text</item>
+                            </option>
+                            <option name="3" xsi:type="array">
+                                <item name="value" xsi:type="string">varchar</item>
+                                <item name="label" xsi:type="string">Vachar</item>
+                            </option>
+                            <option name="4" xsi:type="array">
+                                <item name="value" xsi:type="string">int</item>
+                                <item name="label" xsi:type="string">Int</item>
+                            </option>
+                            <option name="5" xsi:type="array">
+                                <item name="value" xsi:type="string">datetime</item>
+                                <item name="label" xsi:type="string">DateTime</item>
+                            </option>
+                            <option name="6" xsi:type="array">
+                                <item name="value" xsi:type="string">decimal</item>
+                                <item name="label" xsi:type="string">Decimal</item>
+                            </option>
+                        </options>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="is_required" formElement="select">
+            <settings>
+                <label translate="true">Required</label>
+                <dataScope>is_required</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="is_user_defined" formElement="select">
+            <settings>
+                <label translate="true">User Defined</label>
+                <dataScope>is_user_defined</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="customer_visible" formElement="select">
+            <settings>
+                <label translate="true">User Visible</label>
+                <dataScope>customer_visible</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="customer_sort">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Position</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">integer</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">customer_sort</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="custom_form_code" formElement="multiselect" sortOrder="20">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Used In</label>
+                <dataScope>custom_form_code</dataScope>
+                <notice>Use Ctrl+Click for check several values or uncheck value.</notice>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="MW\CreAtt\Model\OptionSource\Display"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

@@ -1,0 +1,36 @@
+<div class="dashboard-container row">
+    <div class="dashboard-main col-m-8 col-m-push-4">
+        <!--Department Name/Content !-->
+        <script>
+            require(["jquery","mage/backend/tabs"], function($){
+                $(function() {
+                    $('#tab_element').tabs({
+                        "openedState": "active",
+                       active: '<?= $block->getActiveTab() ?>',
+                        destination: '#tab_element_content',
+                        shadowTabs: []
+                    });
+                });
+            });
+        </script>
+        <div id="tab_element">
+            <ul class="tabs-horiz" >
+                <?php foreach ($block->getAll() as $item):?>
+                    <li>
+                        <a id="title_department_<?= $item['department_id'] ?>" href="#tabx_<?= $item['department_id'] ?>">
+                <span>
+                    <?php echo __($item['title'].'('.$item['staff'].')'); ?>
+                </span>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+                <li>
+                    <a href="#tab1_content">
+                <span>
+                    <?php echo __("Create new"); ?>
+                </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="tab_element_content">

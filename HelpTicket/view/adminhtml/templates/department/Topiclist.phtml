@@ -1,0 +1,23 @@
+
+    <div class="dashboard-secondary col-m-4 col-m-pull-8">
+        <div class="dashboard-item">
+            <div class="dashboard-item-title"><?= $block->escapeHtml(__('Topic List')) ?></div>
+            <table>
+                <?php foreach ($block->getTicketList($block->getSize()) as $item): ?>
+                <tr>
+                    <td>
+                        <a href="<?= $block->getUrl('helptick/tick/defa').'tab_department/title_department_'.$item['department_id'].'/department_ticket/'.$item['topic_id']; ?>">
+                            <?= (strlen($item['content'])>10)?substr($item['content'],0,10):$item['content']; ?>
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+            <a href="<?= $block->getUrl('helptick/tick/defa').'limit/'.($block->getSize()+1) ?>" >Load More !</a>
+            <h1></h1>
+            <input id="var" type="hidden" />
+            <div id="tam">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="help_ticket_listing_data_source" xsi:type="string">MW\HelpTicket\Model\ResourceModel\Ticket\Grid\Collection</item>
+                <item name="helptick_topic_listing_data_source" xsi:type="string">MW\HelpTicket\Model\ResourceModel\Topic\Grid\Collection</item>
+                <item name="help_defa_listing_data_source" xsi:type="string">MW\HelpTicket\Model\ResourceModel\Defa\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="MW\HelpTicket\Model\ResourceModel\Ticket\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mw_table_helpticket</argument>
+            <argument name="resourceModel" xsi:type="string">MW\HelpTicket\Model\ResourceModel\Ticket</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MW\HelpTicket\Model\ResourceModel\Topic\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mw_helpticket_topic</argument>
+            <argument name="resourceModel" xsi:type="string">MW\HelpTicket\Model\ResourceModel\Topic</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MW\HelpTicket\Model\ResourceModel\Defa\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mw_helpticket_department</argument>
+            <argument name="resourceModel" xsi:type="string">MW\HelpTicket\Model\ResourceModel\Defa</argument>
+        </arguments>
+    </virtualType>
+</config>
